@@ -47,7 +47,43 @@ function graphBubble() {
             .attr("height", diameter)
             .attr("class", "bubble");
 
-            
+            var data = [{"color":"#fff","value":0}, {"color":"#66b266","value":25},{"color":"#198b19","value":50},{"color":"#006500","value":75},{"color":"#003f00","value":100}]
+            var extent = d3.extent(data, d => d.value);
+    
+            var padding = 9;
+            var width = 320;
+            var innerWidth = width - (padding * 2);
+            var barHeight = 8;
+            var height = 28;
+        
+            var xScale = d3.scaleLinear()
+                .range([0, innerWidth])
+                .domain(extent);
+        
+            var xTicks = data.map(d => d.value);
+        
+            var xAxis = d3.axisBottom(xScale)
+                .tickSize(barHeight * 2)
+                .tickValues(xTicks);
+        
+            var g = svg.append("g").attr("transform", "translate(" + padding + ", 0)");
+        
+            var defs = svg.append("defs");
+            var linearGradient = defs.append("linearGradient").attr("id", "myGradient");
+            linearGradient.selectAll("stop")
+                .data(data)
+              .enter().append("stop")
+                .attr("offset", d => ((d.value - extent[0]) / (extent[1] - extent[0]) * 100) + "%")
+                .attr("stop-color", d => d.color);
+        
+            g.append("rect")
+                .attr("width", innerWidth)
+                .attr("height", barHeight)
+                .style("fill", "url(#myGradient)");
+        
+            g.append("g")
+                .call(xAxis)
+              .select(".domain").remove();
 
 
             var nodes = d3.hierarchy(dataset)
