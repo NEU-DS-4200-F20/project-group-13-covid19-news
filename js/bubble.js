@@ -16,15 +16,26 @@ function graphBubble() {
       yScale = d3.scaleLinear(),
       ourBrush = null,
       selectableElements = d3.select(null),
-      dispatcher;
+      dispatcher
 
+    function chart(selector, dataFromCsv) {
 
-    function chart(selector, d) {
+        let minData = d3.min(dataFromCsv, (d) => parseInt(d.Count)),
+        maxData = d3.max(dataFromCsv, (d) => parseInt(d.Count));
         let dataset = {
-            "children": d
+            "children": dataFromCsv
         }
+
+        const allCountArr = [];
+        for (let i =0; i < dataFromCsv.length; i++) {
+            allCountArr.push(parseInt(dataFromCsv[i].Count))
+        }
+        console.log(allCountArr)
         var diameter = 600;
-        color = d3.scaleOrdinal(d3.schemeCategory10)
+        // color = d3.scaleOrdinal(d3.schemeCategory10)
+        var color = d3.scaleOrdinal()
+		//   .domain(data.map(function(d){ return d.departement;}))
+		  .range([ '#003f00', '#006500', '#198b19','#66b266']);
 
         var bubble = d3.pack(dataset)
             .size([diameter, diameter])
@@ -35,6 +46,8 @@ function graphBubble() {
             .attr("width", diameter)
             .attr("height", diameter)
             .attr("class", "bubble");
+
+            
 
 
             var nodes = d3.hierarchy(dataset)
@@ -55,7 +68,7 @@ function graphBubble() {
 
             node.append("title")
             .text(function(d) {
-                return d.data.Word + ": " + d.data.Count;
+                return `the word "${d.data.Word}" was in ${d.data.Count} of X articles we analyzed` // place holder X, change later once we get the number of articles
             });
 
             node.append("circle")
@@ -63,7 +76,18 @@ function graphBubble() {
                 return d.r;
             })
             .style("fill", function(d,i) {
-                return color(i);
+                const count = parseInt(d.data.Count)
+                if (count > d3.quantile(allCountArr, 0.75)) {
+                    return color(3)
+                } else if (count >= d3.quantile(allCountArr, 0.5)) {
+                    return color(2)
+                } 
+             else if (count >= d3.quantile(allCountArr, 0.25)) {
+                return color(1)
+            }
+                else {
+                    return color(0)
+                }
             });
 
             node.append("text")
@@ -74,19 +98,7 @@ function graphBubble() {
             })
             .attr("font-family", "sans-serif")
             .attr("font-size", function(d){
-                return d.r/4;
-            })
-            .attr("fill", "white");
-
-        node.append("text")
-            .attr("dy", "1.3em")
-            .style("text-anchor", "middle")
-            .text(function(d) {
-                return d.data.Count;
-            })
-            .attr("font-family",  "Gill Sans", "Gill Sans MT")
-            .attr("font-size", function(d){
-                return d.r/5;
+                return d.r/2.8;
             })
             .attr("fill", "white");
 
