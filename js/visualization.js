@@ -3,7 +3,7 @@
 ((() => {
   
   d3.csv('data/count_by_articles.csv').then((data) => {
-    let bubbleChart = graphBubble()('#bubbleChart', data);
+    let bubbleChart = graphBubble()('.vis-holder', data);
   });
 
 })());
