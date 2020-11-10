@@ -45,38 +45,38 @@ function graphBubble() {
                 .attr('viewBox', [0, 0, width, height].join(' '))
 
               svg.append("text") // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
-                .attr("x", 110)
+                .attr("x", 100)
                 .attr("y", 10)
                 .attr("text-anchor", "middle")
                 .style("font-size", "6px")
                 .style("text-decoration", "underline")
                 .attr('margin-bottom', 200)
-                .text("Most Used keywords During the COVID-19 Pandemic (January 2020 - May 2020)");
+                .text("Most Used Keywords During the COVID-19 Pandemic (January - May 2020)");
 
                 // add color legend rectangles
                 svg.append("rect")
-                    .attr("x", 10)
+                    .attr("x", 70)
                     .attr("y", 210)
                     .attr("width", 5)
                     .attr("height", 5)
                     .style("fill", "#7fbf7f");
 
                 svg.append("rect")
-                    .attr("x", 10)
+                    .attr("x", 70)
                     .attr("y", 220)
                     .attr("width", 5)
                     .attr("height", 5)
                     .style("fill", "#198b19");
 
                 svg.append("rect")
-                    .attr("x", 10)
+                    .attr("x", 70)
                     .attr("y", 230)
                     .attr("width", 5)
                     .attr("height", 5)
                     .style("fill", "#006500");
 
                     svg.append("rect")
-                    .attr("x", 10)
+                    .attr("x", 70)
                     .attr("y", 240)
                     .attr("width", 5)
                     .attr("height", 5)
@@ -84,25 +84,25 @@ function graphBubble() {
 
                 // add color legend text
                 svg.append("text") 
-                    .attr("x", 17)
+                    .attr("x", 77)
                     .attr("y", 212.75)
                     .text("In less than 25% of analyzed articles")
                     .style("font-size", "4px")
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
-                    .attr("x", 17)
+                    .attr("x", 77)
                     .attr("y", 222.75)
                     .text("In 25-50% of analyzed articles")
                     .style("font-size", "4px")
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
-                    .attr("x", 17)
+                    .attr("x", 77)
                     .attr("y", 232.75)
                     .text("In 50-75% of analyzed articles")
                     .style("font-size", "4px")
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
-                    .attr("x", 17)
+                    .attr("x", 77)
                     .attr("y", 242.75)
                     .text("In more than 75% of analyzed articles")
                     .style("font-size", "4px")
