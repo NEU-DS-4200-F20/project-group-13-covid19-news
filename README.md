@@ -2,7 +2,7 @@
 
 This repository is your starting point for your project. Please look through all these materials so you know how to organize your project.
 
-Link to your GitHub pages website: `[insert your *clickable* hyperlink here]`
+Link to your GitHub pages website: [https://github.com/NEU-DS-4200-F20/project-group-13-covid19-news](https://github.com/NEU-DS-4200-F20/project-group-13-covid19-news)
 
 # Aim of the assignment
 

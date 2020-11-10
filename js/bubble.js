@@ -5,13 +5,13 @@ function graphBubble() {
     // Based on Mike Bostock's margin convention
     // https://bl.ocks.org/mbostock/3019563
     let margin = {
-        top: 60,
+        top: 0,
         left: 50,
         right: 30,
         bottom: 0
       },
       width = 500 - margin.left - margin.right,
-      height = 240;
+      height = 250;
 
     // Create the chart by adding an svg to the div with the id 
     // specified by the selector using the given data
@@ -28,9 +28,9 @@ function graphBubble() {
         }
 
         // set colors and settings for the bubbles
-        const diameter = 200; 
+        const diameter = 205; 
         const color = d3.scaleOrdinal()
-		  .range([ '#003f00', '#006500', '#198b19','#66b266']);
+		  .range([ '#003f00', '#006500', '#198b19','#7fbf7f']);
 
           const bubble = d3.pack(dataset)
             .size([diameter, diameter])
@@ -43,58 +43,70 @@ function graphBubble() {
                 .attr('width', '100%') // this is now required by Chrome to ensure the SVG shows up at all
                 .style('background-color', 'white') // change the background color to white
                 .attr('viewBox', [0, 0, width, height].join(' '))
-                // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
               svg.append("text") // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
-                .attr("x", 210)
+                .attr("x", 110)
                 .attr("y", 10)
                 .attr("text-anchor", "middle")
-                .style("font-size", "10px")
+                .style("font-size", "6px")
                 .style("text-decoration", "underline")
-                .text("Most used keywords During the COVID-19 Pandemic (January 2020 - May 2020)");
+                .attr('margin-bottom', 200)
+                .text("Most Used keywords During the COVID-19 Pandemic (January 2020 - May 2020)");
 
-            // create a color legend. Source: https://bl.ocks.org/HarryStevens/6eb89487fc99ad016723b901cbd57fde  
-            const colors = [{"color":"#fff","value":0}, {"color":"#66b266","value":25},{"color":"#198b19","value":50},{"color":"#006500","value":75},{"color":"#003f00","value":100}]
-            const extent = d3.extent(colors, d => d.value);
-    
-            const padding = 9;
-            const legendWidth = 320;
-            const innerWidth = legendWidth - (padding * 2);
-            const barHeight = 8;
+                // add color legend rectangles
+                svg.append("rect")
+                    .attr("x", 10)
+                    .attr("y", 210)
+                    .attr("width", 5)
+                    .attr("height", 5)
+                    .style("fill", "#7fbf7f");
 
-            // create the scale with ticks
-            const xScale = d3.scaleLinear()
-                .range([0, innerWidth])
-                .domain(extent);
-        
-                const xTicks = colors.map(d => d.value);
-        
-                let xAxis = d3.axisBottom(xScale)
-                .tickSize(barHeight * 2)
-                .tickValues(xTicks);
-        
-            
-            let g = svg.append("g").attr("transform", "translate(" + 55 + ", 210)");
-        
-            // create gradients
-            let defs = svg.append("defs");
-            let linearGradient = defs.append("linearGradient").attr("id", "myGradient");
-            linearGradient.selectAll("stop")
-                .data(colors)
-                .enter().append("stop")
-                .attr("offset", d => ((d.value - extent[0]) / (extent[1] - extent[0]) * 100) + "%")
-                .style("fill", '#fff');
-        
-            // append the rectangles to the group
-            g.append("rect")
-                .attr("width", innerWidth)
-                .attr("height", barHeight)
-                .style("fill", "url(#myGradient)");
-        
-            g.append("g")
-                .call(xAxis)
-                .select(".domain").remove();
+                svg.append("rect")
+                    .attr("x", 10)
+                    .attr("y", 220)
+                    .attr("width", 5)
+                    .attr("height", 5)
+                    .style("fill", "#198b19");
 
+                svg.append("rect")
+                    .attr("x", 10)
+                    .attr("y", 230)
+                    .attr("width", 5)
+                    .attr("height", 5)
+                    .style("fill", "#006500");
+
+                    svg.append("rect")
+                    .attr("x", 10)
+                    .attr("y", 240)
+                    .attr("width", 5)
+                    .attr("height", 5)
+                    .style("fill", "#003f00");
+
+                // add color legend text
+                svg.append("text") 
+                    .attr("x", 17)
+                    .attr("y", 212.75)
+                    .text("In less than 25% of analyzed articles")
+                    .style("font-size", "4px")
+                    .attr("alignment-baseline", "middle");
+                    svg.append("text") 
+                    .attr("x", 17)
+                    .attr("y", 222.75)
+                    .text("In 25-50% of analyzed articles")
+                    .style("font-size", "4px")
+                    .attr("alignment-baseline", "middle");
+                    svg.append("text") 
+                    .attr("x", 17)
+                    .attr("y", 232.75)
+                    .text("In 50-75% of analyzed articles")
+                    .style("font-size", "4px")
+                    .attr("alignment-baseline", "middle");
+                    svg.append("text") 
+                    .attr("x", 17)
+                    .attr("y", 242.75)
+                    .text("In more than 75% of analyzed articles")
+                    .style("font-size", "4px")
+                    .attr("alignment-baseline", "middle");
 
             // add data to individual bubbles
             const nodes = d3.hierarchy(dataset)
@@ -110,8 +122,9 @@ function graphBubble() {
             .append("g")
             .attr("class", "node")
             .attr("transform", function(d) {
-                return "translate(" + d.x + "," + d.y + ")";
-            });
+                return `translate(${d.x}, ${d.y + 8})`
+            })
+            .attr("cx", 410).attr("cy", 190)
 
             // details on demand when user hovers over bubble
             node.append("title")
@@ -137,7 +150,7 @@ function graphBubble() {
                 else {
                     return color(0) // else, color the circle the lighest green 
                 }
-            });
+            })
 
             // append the words to the circles
             node.append("text")
@@ -150,38 +163,14 @@ function graphBubble() {
             .attr("font-size", function(d){
                 return d.r/2.8; // font size for the text on the circles are based on the radius
             })
-            .style("fill", function(d) {
-                const count = parseInt(d.data.Count)
-                if (count > d3.quantile(allCountArr, 0.75)) { // change font color based on quartiles, where dark green circles have white text and light green ones have black text
-                    return 'white'
-                } else if (count >= d3.quantile(allCountArr, 0.5)) {
-                    return 'white'
-                } 
-             else if (count >= d3.quantile(allCountArr, 0.25)) {
-                return 'white'
-            }
-                else {
-                    return 'black'
-                }
-            });
+            .style("fill", "white")
+            .style('text-shadow', '.5px 0 0 #000, 0 -.5px 0 #000, 0 .5px 0 #000, -.5px 0 0 #000') // add a very thin line shadow
 
         d3.select(self.frameElement)
             .style("height", diameter + "px");
-            
+        
             return chart;
     }
-
-    chart.width = function (_) {
-        if (!arguments.length) return width;
-        width = _;
-        return chart;
-      };
-    
-      chart.height = function (_) {
-        if (!arguments.length) return height;
-        height = _;
-        return chart;
-      };
 
     return chart;
 }
