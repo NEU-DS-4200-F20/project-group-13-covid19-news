@@ -8,10 +8,10 @@ function graphBubble() {
         top: 0,
         left: 50,
         right: 30,
-        bottom: 0
+        bottom: 35
       },
-      width = 500 - margin.left - margin.right,
-      height = 250;
+    //   width = 100,
+      height = 500;
 
     // Create the chart by adding an svg to the div with the id 
     // specified by the selector using the given data
@@ -36,19 +36,20 @@ function graphBubble() {
             .size([diameter, diameter])
             .padding(1.5);
 
-            // create svg that will contain our bubbles
             let svg = d3.select(selector)
-                .append('svg')
-                .attr('preserveAspectRatio', 'xMidYMid meet') // this will scale your visualization according to the size of the page.
-                .attr('width', '100%') // this is now required by Chrome to ensure the SVG shows up at all
-                .style('background-color', 'white') // change the background color to white
-                .attr('viewBox', [0, 0, width, height].join(' '))
+            .append('svg')
+              .attr('preserveAspectRatio', 'xMidYMid meet')
+              .attr('viewBox', [50, 0, 195, 250].join(' '))
+              .classed('svg-content', true);
+      
+          svg = svg.append('g')
+              .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
               svg.append("text") // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
                 .attr("x", 100)
                 .attr("y", 10)
                 .attr("text-anchor", "middle")
-                .style("font-size", "6px")
+                .style("font-size", "4px")
                 .style("text-decoration", "underline")
                 .attr('margin-bottom', 200)
                 .text("Most Used Keywords During the COVID-19 Pandemic (January - May 2020)");

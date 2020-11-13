@@ -22,6 +22,16 @@ h1, h2, h3 {
   display: flex;
 }
 
+/* The line chart will take the left half of the screen */
+.linechart-holder {
+	flex: 0 0 50%;
+  }
+  
+  /* The scatterplot will take the right half of the screen */
+.bubblechart-holder {
+flex: 1;
+}
+
 .vis-svg {
   background-color: #f4f1f0;
 }
