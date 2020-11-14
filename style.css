@@ -22,6 +22,11 @@ h1, h2, h3 {
   display: flex;
 }
 
+.line {
+	fill: none;
+	stroke: #ed3700;
+}
+
 /* The line chart will take the left half of the screen */
 .linechart-holder {
 	flex: 0 0 50%;

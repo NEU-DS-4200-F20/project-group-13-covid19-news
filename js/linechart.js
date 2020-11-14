@@ -27,15 +27,38 @@ function linechart() {
   
     // Create the chart by adding an svg to the div with the id 
     // specified by the selector using the given data
-    function chart(selector, data) {
-      const countArr = [];
-      for (let i = 0; i < data.length; i++) {
-          countArr.push(parseFloat(data[i].Percent))
-      }
+    function chart(selector, data) { 
+
+      // structure data/group words by month
+      const slices = [];
+      const timeConv = d3.timeParse("%d-%b-%Y");
+      
+
+      data.forEach((word) => { // source: https://datawanderings.com/2019/10/28/tutorial-making-a-line-chart-in-d3-js-v-5/
+        const month = new Date();
+        month.setMonth(word.Month - 1)
+        let wordObject = slices.find(el => el.id === word.Word );
+        if (!wordObject) { // first time we see word
+          wordObject = {
+            id: word.Word,
+            values: [{
+              month: +word.Month,
+              percent: +word.Percent
+            }]
+          }
+          slices.push(wordObject)
+        } else { // push percent to values (source: https://stackoverflow.com/questions/35206125/javascript-es6-es5-find-in-array-and-change)
+          slices[slices.findIndex(el => el.id === word.Word)].values.push({
+            month: +word.Month,
+            percent: +word.Percent
+          })
+        }
+      });
+
       let svg = d3.select(selector)
         .append('svg')
           .attr('preserveAspectRatio', 'xMidYMid meet')
-          .attr('viewBox', [150, 20, 500, 500].join(' '))
+          .attr('viewBox', [150, 0, 500, 500].join(' '))
           .classed('svg-content', true);
   
       svg = svg.append('g')
@@ -44,12 +67,12 @@ function linechart() {
       //Define scales
       xScale
         .domain(d3.group(data, xValue).keys())
-        .rangeRound([0, width]);
+        .rangeRound([0, 350]);
         
       yScale
         .domain([
-            d3.min(countArr),
-            d3.max(countArr)
+            0,
+            100
         ])
         .rangeRound([height, 0]);
   
@@ -68,7 +91,7 @@ function linechart() {
       // X axis label
       xAxis.append('text')        
           .attr('class', 'axisLabel')
-          .attr('transform', 'translate(' + (width - 50) + ',-10)')
+          .attr('transform', 'translate(' + 0 + ',0)')
           .text(xLabelText);
       
       // Y axis and label
@@ -76,36 +99,42 @@ function linechart() {
           .call(d3.axisLeft(yScale))
         .append('text')
           .attr('class', 'axisLabel')
-          .attr('transform', 'translate(' + yLabelOffsetPx + ', -12)')
+          .attr('transform', 'translate(' + 0 + ', 0)')
           .text(yLabelText);
   
-    //   // Add the line
-    //   svg.append('path')
-    //       .datum(data)
-    //       .attr('class', 'linePath')
-    //       .attr('d', d3.line()
-    //         // Just add that to have a curve instead of segments
-    //         .x(X)
-    //         .y(Y)
-    //       );
-  
-    //   // Add the points
-    //   let points = svg.append('g')
-    //     .selectAll('.linePoint')
-    //       .data(data);
+      // Add the line
+      let line = d3.line()
+      .x(function(d) {
+          return xScale(d.month);
+      })
+      .y(function(d) {
+          return yScale(d.percent);
+      });
+
+      // create the lines
+const lines = svg.selectAll("lines")
+    .data(slices)
+    .enter()
+    .append("g");
+
+    lines.append("path")
+    .attr("id", function(d) { return d.id }) // give each line a unique id
+    .attr('class', 'line')
+    .attr("d", function(d) { return line(d.values); });
+
+    lines.append("text")
+    .attr("class","serie_label")
+    .datum(function(d) {
+        return {
+            id: d.id,
+            value: d.values[d.values.length - 1]}; })
+    .attr("transform", function(d) {
+            return "translate(" + (xScale(d.value.month) + 10)  
+            + "," + (yScale(d.value.percent)) + ")";})
+    .attr("x", 5)
+    .attr("font-size", '6px')
+    .text(function(d) { return d.id; });
       
-    //   points.exit().remove();
-            
-    //   points = points.enter()
-    //     .append('circle')
-    //       .attr('class', 'point linePoint')
-    //     .merge(points)
-    //       .attr('cx', X)
-    //       .attr('cy', Y)        
-    //       .attr('r',5);
-          
-    //   selectableElements = points;
-  
       return chart;
     }
   
