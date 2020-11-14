@@ -22,9 +22,12 @@ h1, h2, h3 {
   display: flex;
 }
 
+#coronavirus-cases {
+	stroke: purple;
+}
+
 .line {
 	fill: none;
-	stroke: #ed3700;
 }
 
 /* The line chart will take the left half of the screen */

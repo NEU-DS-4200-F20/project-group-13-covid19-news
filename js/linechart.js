@@ -29,30 +29,37 @@ function linechart() {
     // specified by the selector using the given data
     function chart(selector, data) { 
 
-      // structure data/group words by month
-      const slices = [];
+      
+      const slices = []; // structure data/group words by month
       const timeConv = d3.timeParse("%d-%b-%Y");
       
-
       data.forEach((word) => { // source: https://datawanderings.com/2019/10/28/tutorial-making-a-line-chart-in-d3-js-v-5/
         const month = new Date();
         month.setMonth(word.Month - 1)
         let wordObject = slices.find(el => el.id === word.Word );
+        let total = 0;
         if (!wordObject) { // first time we see word
           wordObject = {
             id: word.Word,
             values: [{
               month: +word.Month,
-              percent: +word.Percent
+              percent: +word.Percent,
+              count: +word.Count
             }]
           }
           slices.push(wordObject)
+          
+          total = +word.Count
+ 
         } else { // push percent to values (source: https://stackoverflow.com/questions/35206125/javascript-es6-es5-find-in-array-and-change)
           slices[slices.findIndex(el => el.id === word.Word)].values.push({
             month: +word.Month,
-            percent: +word.Percent
+            percent: +word.Percent,
+            count: +word.Count
           })
+          total += wordObject.values.map(item => item.count).reduce((prev, next) => prev + next);
         }
+        wordObject.total = total // add grand total of counts
       });
 
       let svg = d3.select(selector)
@@ -112,28 +119,48 @@ function linechart() {
       });
 
       // create the lines
-const lines = svg.selectAll("lines")
-    .data(slices)
-    .enter()
-    .append("g");
+    const lines = svg.selectAll("lines")
+      .data(slices)
+      .enter()
+      .append("g");
 
     lines.append("path")
     .attr("id", function(d) { return d.id }) // give each line a unique id
     .attr('class', 'line')
-    .attr("d", function(d) { return line(d.values); });
+    .attr("d", function(d) { return line(d.values); })
+    .style("stroke", function(d) { // color the lines based on word usage
+      if (d.id != 'coronavirus-cases') {
+        const count = parseInt(d.total)
+      if (count > d3.quantile(allCountArr, 0.75)) { // if greater/equal to 75th percentile, color dark green
+          return '#003f00'
+      } else if (count >= d3.quantile(allCountArr, 0.5)) { // greater/equal to the 50th percentile, color lighter green
+          return '#006500'
+      } 
+      else if (count >= d3.quantile(allCountArr, 0.25)) { // greater/equal to the 25th percentile, color even lighter green
+          return '#198b19'
+      }
+      else {
+          return '#7fbf7f' // else, color the circle the lighest green 
+      }
+      }
+      
+  })
 
     lines.append("text")
     .attr("class","serie_label")
     .datum(function(d) {
         return {
             id: d.id,
-            value: d.values[d.values.length - 1]}; })
+            value: d.values[d.values.length - 1],
+            total: d.total
+          }; })  
     .attr("transform", function(d) {
             return "translate(" + (xScale(d.value.month) + 10)  
             + "," + (yScale(d.value.percent)) + ")";})
     .attr("x", 5)
     .attr("font-size", '6px')
-    .text(function(d) { return d.id; });
+    .text(function(d) { return d.id; })
+    
       
       return chart;
     }

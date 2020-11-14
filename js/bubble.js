@@ -1,5 +1,9 @@
 // Initialize a bubble chart. Modeled after Mike Bostock's
 // Reusable Chart framework https://bost.ocks.org/mike/chart/
+
+// make a global array so linechart.js can access it
+const allCountArr = []; // will fill array with all the word counts so we can use this later (for calculating quartiles)
+
 function graphBubble() {
 
     // Based on Mike Bostock's margin convention
@@ -22,7 +26,7 @@ function graphBubble() {
             "children": dataFromCsv
         }
 
-        const allCountArr = []; // create an array with all the word counts so we can use this later (for calculating quartiles)
+        
         for (let i =0; i < dataFromCsv.length; i++) {
             allCountArr.push(parseInt(dataFromCsv[i].Count))
         }
