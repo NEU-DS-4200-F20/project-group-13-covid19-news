@@ -7,7 +7,7 @@ function linechart() {
     // Based on Mike Bostock's margin convention
     // https://bl.ocks.org/mbostock/3019563
     let margin = {
-        top: -260,
+        top: 90,
         left: 200,
         right: 30,
         bottom: 35
@@ -15,7 +15,7 @@ function linechart() {
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom,
       xValue = d => d[0],
-      yValue = d => d[2],
+      yValue = d => d[3],
       xLabelText = '',
       yLabelText = '',
       yLabelOffsetPx = 0,
@@ -30,12 +30,12 @@ function linechart() {
     function chart(selector, data) {
       const countArr = [];
       for (let i = 0; i < data.length; i++) {
-          countArr.push(parseInt(data[i].Count))
+          countArr.push(parseFloat(data[i].Percent))
       }
       let svg = d3.select(selector)
         .append('svg')
           .attr('preserveAspectRatio', 'xMidYMid meet')
-          .attr('viewBox', [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom].join(' '))
+          .attr('viewBox', [150, 20, 500, 500].join(' '))
           .classed('svg-content', true);
   
       svg = svg.append('g')

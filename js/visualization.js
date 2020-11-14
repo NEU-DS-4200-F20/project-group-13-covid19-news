@@ -6,7 +6,7 @@
     let bubbleChart = graphBubble()('#bubblechart', data); // draw the bubble chart
   });
 
-  d3.csv('data/count_by_date.csv').then((data) => {
+  d3.csv('data/word_by_percent.csv').then((data) => {
     let lineChart = linechart()
       .x(d => d.Month)
       .xLabel('Month')

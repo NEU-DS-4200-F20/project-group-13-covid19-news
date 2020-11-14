@@ -39,7 +39,7 @@ function graphBubble() {
             let svg = d3.select(selector)
             .append('svg')
               .attr('preserveAspectRatio', 'xMidYMid meet')
-              .attr('viewBox', [50, 0, 195, 250].join(' '))
+              .attr('viewBox', [50, 0, 205, 250].join(' '))
               .classed('svg-content', true);
       
           svg = svg.append('g')
@@ -47,7 +47,7 @@ function graphBubble() {
 
               svg.append("text") // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
                 .attr("x", 100)
-                .attr("y", 10)
+                .attr("y", 7)
                 .attr("text-anchor", "middle")
                 .style("font-size", "4px")
                 .style("text-decoration", "underline")
