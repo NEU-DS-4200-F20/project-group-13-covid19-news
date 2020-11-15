@@ -64,7 +64,7 @@ function linechart() {
       let svg = d3.select(selector)
         .append('svg')
           .attr('preserveAspectRatio', 'xMidYMid meet')
-          .attr('viewBox', [150, 20, 500, 500].join(' '))
+          .attr('viewBox', [150, 20, 500, 700].join(' '))
           .classed('svg-content', true);
   
       svg = svg.append('g')
@@ -153,13 +153,20 @@ function linechart() {
       }
      })
 
+     svg.append("line")//making a line for legend. source: https://stackoverflow.com/questions/35516083/how-to-make-a-dashed-line-legend-with-d3-js
+     .attr("x1", 20)
+     .attr("x2", 50)
+     .attr("y1", 450)
+     .attr("y2", 450)
+     .style("stroke-dasharray","2,2")//dashed array for line
+     .style("stroke", 'purple');
+
      svg.append("line")//making a line for legend
-     .attr('x1', width * 0.96 )
-      .attr('x2', (width * 0.96) + 30)
-      .attr('y1', 10)
-      .attr('y2', 10)
-      .style('stroke-dasharray','5,5')
-      // .style('stroke', z);
+     .attr("x1", 20)
+     .attr("x2", 50)
+     .attr("y1", 470)
+     .attr("y2", 470)
+     .style("stroke", 'black');
     
       
       return chart;
