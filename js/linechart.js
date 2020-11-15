@@ -32,10 +32,9 @@ function linechart() {
       
       const slices = []; // structure data/group words by month
       const timeConv = d3.timeParse("%d-%b-%Y");
+      const color = d3.scaleOrdinal(d3.schemeCategory10);
       
       data.forEach((word) => { // source: https://datawanderings.com/2019/10/28/tutorial-making-a-line-chart-in-d3-js-v-5/
-        const month = new Date();
-        month.setMonth(word.Month - 1)
         let wordObject = slices.find(el => el.id === word.Word );
         let total = 0;
         if (!wordObject) { // first time we see word
@@ -65,7 +64,7 @@ function linechart() {
       let svg = d3.select(selector)
         .append('svg')
           .attr('preserveAspectRatio', 'xMidYMid meet')
-          .attr('viewBox', [150, 0, 500, 500].join(' '))
+          .attr('viewBox', [150, 20, 500, 500].join(' '))
           .classed('svg-content', true);
   
       svg = svg.append('g')
@@ -82,11 +81,14 @@ function linechart() {
             100
         ])
         .rangeRound([height, 0]);
+
+        let months = ['January', 'February', 'March', 'April']
   
       // X axis
       let xAxis = svg.append('g')
           .attr('transform', 'translate(0,' + (height) + ')')
-          .call(d3.axisBottom(xScale));
+          .call(d3.axisBottom(xScale).tickFormat(function(d,i){ return months[i] })) // format the ticks. source: https://stackoverflow.com/questions/29385146/changing-ticks-values-to-text-using-d3
+
           
       // Put X axis tick labels at an angle
       xAxis.selectAll('text')	
@@ -94,13 +96,7 @@ function linechart() {
           .attr('dx', '-.8em')
           .attr('dy', '.15em')
           .attr('transform', 'rotate(-65)');
-          
-      // X axis label
-      xAxis.append('text')        
-          .attr('class', 'axisLabel')
-          .attr('transform', 'translate(' + 0 + ',0)')
-          .text(xLabelText);
-      
+
       // Y axis and label
       let yAxis = svg.append('g')
           .call(d3.axisLeft(yScale))
@@ -128,20 +124,10 @@ function linechart() {
     .attr("id", function(d) { return d.id }) // give each line a unique id
     .attr('class', 'line')
     .attr("d", function(d) { return line(d.values); })
-    .style("stroke", function(d) { // color the lines based on word usage
+    .style("stroke", function(d, i) { // color the lines based on word usage
       if (d.id != 'coronavirus-cases') {
-        const count = parseInt(d.total)
-      if (count > d3.quantile(allCountArr, 0.75)) { // if greater/equal to 75th percentile, color dark green
-          return '#003f00'
-      } else if (count >= d3.quantile(allCountArr, 0.5)) { // greater/equal to the 50th percentile, color lighter green
-          return '#006500'
-      } 
-      else if (count >= d3.quantile(allCountArr, 0.25)) { // greater/equal to the 25th percentile, color even lighter green
-          return '#198b19'
-      }
-      else {
-          return '#7fbf7f' // else, color the circle the lighest green 
-      }
+        return color(i)
+
       }
       
   })
@@ -159,7 +145,21 @@ function linechart() {
             + "," + (yScale(d.value.percent)) + ")";})
     .attr("x", 5)
     .attr("font-size", '6px')
-    .text(function(d) { return d.id; })
+    .text(function(d) { 
+      if (d.id != 'coronavirus-cases') {
+        return d.id;
+      } else {
+        return ''
+      }
+     })
+
+     svg.append("line")//making a line for legend
+     .attr('x1', width * 0.96 )
+      .attr('x2', (width * 0.96) + 30)
+      .attr('y1', 10)
+      .attr('y2', 10)
+      .style('stroke-dasharray','5,5')
+      // .style('stroke', z);
     
       
       return chart;
