@@ -124,11 +124,7 @@ function linechart() {
     .attr('class', 'line')
     .attr("d", function(d) { return line(d.values); })
     .style("stroke", function(d, i) { // color the lines based on word usage
-      if (d.id != 'coronavirus-cases') {
-        return color(i)
-
-      }
-      
+      return color(i)
   })
 
     // append the word next to the line
@@ -146,27 +142,8 @@ function linechart() {
     .attr("x", 5)
     .attr("font-size", '6px')
     .text(function(d) { 
-      if (d.id != 'coronavirus-cases') { 
-        return d.id;
-      } else {
-        return ''
-      }
+      return d.id;
      })
-
-     svg.append("line")//making a line for legend. source: https://stackoverflow.com/questions/35516083/how-to-make-a-dashed-line-legend-with-d3-js
-     .attr("x1", 20)
-     .attr("x2", 50)
-     .attr("y1", 450)
-     .attr("y2", 450)
-     .style("stroke-dasharray","2,2")//dashed array for line
-     .style("stroke", 'black');
-
-     svg.append("line")//making a line for legend
-     .attr("x1", 20)
-     .attr("x2", 50)
-     .attr("y1", 470)
-     .attr("y2", 470)
-     .style("stroke", 'black');
 
      // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
      svg.append("text") 
@@ -176,7 +153,7 @@ function linechart() {
                 .style("font-size", "10px")
                 .style("text-decoration", "underline")
                 .attr('margin-bottom', 200)
-                .text("Percent Change of Keyword Usage Compared to COVID-19 Cases Over Time (January - April 2020)");
+                .text("Usage of Keywords in COVID-related Articles (January - April 2020)");
 
     // append axis labels
     svg.append("text") 
@@ -186,7 +163,7 @@ function linechart() {
     .style("font-weight", "bold")
     .style("font-size", "8px")
     .attr('margin-bottom', 200)
-    .text("Percent Change");
+    .text("Percent of Total Articles");
 
     svg.append("text") // this appends the label for the month
     .attr("x", 380)
@@ -196,22 +173,7 @@ function linechart() {
     .style("font-weight", "bold")
     .text("Month");
 
-    // append legend labels
-    svg.append("text")
-    .attr("x", 110)
-    .attr("y", 452)
-    .attr("text-anchor", "middle")
-    .style("font-size", "8px")
-    .text("COVID-19 cases (worldwide)");
 
-    svg.append("text")
-    .attr("x", 106)
-    .attr("y", 472)
-    .attr("text-anchor", "middle")
-    .style("font-size", "8px")
-    .text("Keyword usage in articles");
-    
-      
       return chart;
     }
   
