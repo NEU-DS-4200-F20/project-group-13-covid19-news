@@ -9,9 +9,7 @@
   d3.csv('data/word_by_percent.csv').then((data) => {
     let lineChart = linechart()
       .x(d => d.Month)
-      .xLabel('Month')
       .y(d => d.Count)
-      .yLabel('# of Articles Appeared in')
       .yLabelOffset(40)
       // .selectionDispatcher(d3.dispatch(dispatchString))
       ('#linechart', data);

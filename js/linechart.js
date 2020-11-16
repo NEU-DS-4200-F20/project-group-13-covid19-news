@@ -29,16 +29,14 @@ function linechart() {
     // specified by the selector using the given data
     function chart(selector, data) { 
 
-      
       const slices = []; // structure data/group words by month
-      const timeConv = d3.timeParse("%d-%b-%Y");
       const color = d3.scaleOrdinal(d3.schemeCategory10);
       
       data.forEach((word) => { // source: https://datawanderings.com/2019/10/28/tutorial-making-a-line-chart-in-d3-js-v-5/
         let wordObject = slices.find(el => el.id === word.Word );
         let total = 0;
         if (!wordObject) { // first time we see word
-          wordObject = {
+          wordObject = { // create an object with the id of the word and values for each month
             id: word.Word,
             values: [{
               month: +word.Month,
@@ -48,7 +46,7 @@ function linechart() {
           }
           slices.push(wordObject)
           
-          total = +word.Count
+          total = +word.Count // calculate a grand total for the words
  
         } else { // push percent to values (source: https://stackoverflow.com/questions/35206125/javascript-es6-es5-find-in-array-and-change)
           slices[slices.findIndex(el => el.id === word.Word)].values.push({
@@ -61,10 +59,11 @@ function linechart() {
         wordObject.total = total // add grand total of counts
       });
 
+      // create the svg
       let svg = d3.select(selector)
         .append('svg')
           .attr('preserveAspectRatio', 'xMidYMid meet')
-          .attr('viewBox', [150, 20, 500, 700].join(' '))
+          .attr('viewBox', [150, 40, 500, 700].join(' '))
           .classed('svg-content', true);
   
       svg = svg.append('g')
@@ -82,6 +81,7 @@ function linechart() {
         ])
         .rangeRound([height, 0]);
 
+        // array of months which we will use to format the x axis ticks
         let months = ['January', 'February', 'March', 'April']
   
       // X axis
@@ -97,13 +97,12 @@ function linechart() {
           .attr('dy', '.15em')
           .attr('transform', 'rotate(-65)');
 
-      // Y axis and label
+      // Y axis
       let yAxis = svg.append('g')
           .call(d3.axisLeft(yScale))
         .append('text')
           .attr('class', 'axisLabel')
           .attr('transform', 'translate(' + 0 + ', 0)')
-          .text(yLabelText);
   
       // Add the line
       let line = d3.line()
@@ -114,7 +113,7 @@ function linechart() {
           return yScale(d.percent);
       });
 
-      // create the lines
+    // create the lines
     const lines = svg.selectAll("lines")
       .data(slices)
       .enter()
@@ -132,6 +131,7 @@ function linechart() {
       
   })
 
+    // append the word next to the line
     lines.append("text")
     .attr("class","serie_label")
     .datum(function(d) {
@@ -146,7 +146,7 @@ function linechart() {
     .attr("x", 5)
     .attr("font-size", '6px')
     .text(function(d) { 
-      if (d.id != 'coronavirus-cases') {
+      if (d.id != 'coronavirus-cases') { 
         return d.id;
       } else {
         return ''
@@ -159,7 +159,7 @@ function linechart() {
      .attr("y1", 450)
      .attr("y2", 450)
      .style("stroke-dasharray","2,2")//dashed array for line
-     .style("stroke", 'purple');
+     .style("stroke", 'black');
 
      svg.append("line")//making a line for legend
      .attr("x1", 20)
@@ -167,6 +167,49 @@ function linechart() {
      .attr("y1", 470)
      .attr("y2", 470)
      .style("stroke", 'black');
+
+     // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
+     svg.append("text") 
+                .attr("x", 195)
+                .attr("y", -34)
+                .attr("text-anchor", "middle")
+                .style("font-size", "10px")
+                .style("text-decoration", "underline")
+                .attr('margin-bottom', 200)
+                .text("Percent Change of Keyword Usage Compared to COVID-19 Cases Over Time (January - April 2020)");
+
+    // append axis labels
+    svg.append("text") 
+    .attr("x", 1)
+    .attr("y", -13)
+    .attr("text-anchor", "middle")
+    .style("font-weight", "bold")
+    .style("font-size", "8px")
+    .attr('margin-bottom', 200)
+    .text("Percent Change");
+
+    svg.append("text") // this appends the label for the month
+    .attr("x", 380)
+    .attr("y", 380)
+    .attr("text-anchor", "middle")
+    .style("font-size", "8px")
+    .style("font-weight", "bold")
+    .text("Month");
+
+    // append legend labels
+    svg.append("text")
+    .attr("x", 110)
+    .attr("y", 452)
+    .attr("text-anchor", "middle")
+    .style("font-size", "8px")
+    .text("COVID-19 cases (worldwide)");
+
+    svg.append("text")
+    .attr("x", 106)
+    .attr("y", 472)
+    .attr("text-anchor", "middle")
+    .style("font-size", "8px")
+    .text("Keyword usage in articles");
     
       
       return chart;
