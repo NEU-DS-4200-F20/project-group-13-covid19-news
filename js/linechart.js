@@ -89,7 +89,6 @@ function linechart() {
           .attr('transform', 'translate(0,' + (height) + ')')
           .call(d3.axisBottom(xScale).tickFormat(function(d,i){ return months[i] })) // format the ticks. source: https://stackoverflow.com/questions/29385146/changing-ticks-values-to-text-using-d3
 
-          
       // Put X axis tick labels at an angle
       xAxis.selectAll('text')	
           .style('text-anchor', 'end')

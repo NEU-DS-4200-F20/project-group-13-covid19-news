@@ -14,8 +14,9 @@ function graphBubble() {
         right: 30,
         bottom: 35
       },
-    //   width = 100,
-      height = 500;
+      ourBrush = null,
+      selectableElements = d3.select(null),
+      dispatcher;
 
     // Create the chart by adding an svg to the div with the id 
     // specified by the selector using the given data
@@ -93,24 +94,28 @@ function graphBubble() {
                     .attr("y", 212.75)
                     .text("Bottom 25% most commonly used words in articles")
                     .style("font-size", "4px")
+                    .style("fill", "rgb(0, 0, 0)")
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
                     .attr("x", 77)
                     .attr("y", 222.75)
                     .text("25-50% most commonly used words in articles")
                     .style("font-size", "4px")
+                    .style("fill", "rgb(0, 0, 0)")
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
                     .attr("x", 77)
                     .attr("y", 232.75)
                     .text("50-75% most commonly used words in articles")
                     .style("font-size", "4px")
+                    .style("fill", "rgb(0, 0, 0)")
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
                     .attr("x", 77)
                     .attr("y", 242.75)
                     .text("Top 25% most commonly used words in articles")
                     .style("font-size", "4px")
+                    .style("fill", "rgb(0, 0, 0)")
                     .attr("alignment-baseline", "middle");
 
             // add data to individual bubbles
@@ -173,9 +178,72 @@ function graphBubble() {
 
         d3.select(self.frameElement)
             .style("height", diameter + "px");
+
+
+    // 0 0 208 208
+    svg.call(brush);
+
+    // Highlight points when brushed
+    function brush(g) {
+      const brush = d3.brush() // Create a 2D interactive brush
+        .on('start brush', highlight) // When the brush starts/continues do...
+        .on('end', brushEnd) // When the brush ends do...
+        .extent([
+          [0,0],
+          [208,208]
+        ]);
         
+      ourBrush = brush;
+
+      g.call(brush); // Adds the brush to this element
+
+      // Highlight the selected circles
+      function highlight(event, d) {
+        if (event.selection === null) return;
+        const [
+          [x0, y0],
+          [x1, y1]
+        ] = event.selection;
+        let circles = svg.selectAll('circle')
+        circles.classed("selected", function(d){ 
+            return x0 <= d.x && d.x <= x1 && y0 <= d.y && d.y <= y1;
+         })
+
+        // Get the name of our dispatcher's event
+        let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+    
+        // Let other charts know about our selection
+        dispatcher.call(dispatchString, this, svg.selectAll('.selected').data());
+      }
+      
+      function brushEnd(event, d){
+        // We don't want infinite recursion
+        if(event.sourceEvent !== undefined && event.sourceEvent.type!='end'){
+          d3.select(this).call(brush.move, null);
+        }
+      }
+    }        
             return chart;
     }
+
+    // Gets or sets the dispatcher we use for selection events
+  chart.selectionDispatcher = function (_) {
+    if (!arguments.length) return dispatcher;
+    dispatcher = _;
+    return chart;
+  };
+
+  // Given selected data from another visualization 
+  // select the relevant elements here (linking)
+  chart.updateSelection = function (selectedData) {
+    if (!arguments.length) return;
+    // Select an element if its datum was selected
+    // selectableElements.classed('selected', d =>
+    //   selectedData.includes(d)
+    // );
+
+  };
+
 
     return chart;
 }
