@@ -180,7 +180,6 @@ function graphBubble() {
             .style("height", diameter + "px");
 
 
-    // 0 0 208 208
     svg.call(brush);
 
     // Highlight points when brushed
@@ -211,7 +210,7 @@ function graphBubble() {
 
         // Get the name of our dispatcher's event
         let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-    
+      
         // Let other charts know about our selection
         dispatcher.call(dispatchString, this, svg.selectAll('.selected').data());
       }
@@ -237,11 +236,6 @@ function graphBubble() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    // Select an element if its datum was selected
-    // selectableElements.classed('selected', d =>
-    //   selectedData.includes(d)
-    // );
-
   };
 
 

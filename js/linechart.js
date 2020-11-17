@@ -21,7 +21,6 @@ function linechart() {
       yLabelOffsetPx = 0,
       xScale = d3.scalePoint(),
       yScale = d3.scaleLinear(),
-      ourBrush = null,
       selectableElements = d3.select(null),
       dispatcher;
   
@@ -146,13 +145,13 @@ function linechart() {
 
      // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
      svg.append("text") 
-                .attr("x", 195)
-                .attr("y", -34)
-                .attr("text-anchor", "middle")
-                .style("font-size", "10px")
-                .style("text-decoration", "underline")
-                .attr('margin-bottom', 200)
-                .text("Usage of Keywords in COVID-related Articles (January - April 2020)");
+        .attr("x", 195)
+        .attr("y", -34)
+        .attr("text-anchor", "middle")
+        .style("font-size", "10px")
+        .style("text-decoration", "underline")
+        .attr('margin-bottom', 200)
+        .text("Usage of Keywords in COVID-related Articles (January - April 2020)");
 
     // append axis labels
     svg.append("text") 
@@ -247,9 +246,7 @@ function linechart() {
       if (!arguments.length) return;
   
       // Select an element if its datum was selected
-      selectableElements.classed('selected', d =>
-        selectedData.includes(d)
-      );
+      console.log(selectedData)
     };
   
     return chart;
