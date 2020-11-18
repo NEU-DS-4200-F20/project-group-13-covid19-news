@@ -57,8 +57,8 @@ function graphBubble() {
                 .style("font-size", "4px")
                 .style("text-decoration", "underline")
                 .attr('margin-bottom', 200)
-                .text("Most Used Keywords During the COVID-19 Pandemic (January - April 2020)");
-
+                .text("Most Used Keywords During the COVID-19 Pandemic (January - April 2020)")
+                .style("fill", "rgb(0, 0, 0)")
                 // add color legend rectangles
                 svg.append("rect")
                     .attr("x", 70)
