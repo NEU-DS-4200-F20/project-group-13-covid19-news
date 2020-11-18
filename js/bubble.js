@@ -205,7 +205,7 @@ function graphBubble() {
         ] = event.selection;
         let circles = svg.selectAll('circle')
         circles.classed("selected", function(d){ 
-            return (x0 <= d.x && d.x <= x1 && y0 <= d.y && d.y <= y1);
+          return (x0 <= d.x + d.r && d.x - d.r <= x1 && y0 <= d.y + 8 + d.r && d.y + 8 - d.r <= y1)
         })
 
         // Get the name of our dispatcher's event
