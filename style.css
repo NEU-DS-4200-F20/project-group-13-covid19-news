@@ -37,6 +37,11 @@ h1, h2, h3 {
 
 .line {
 	fill: none;
+	display: none;
+}
+
+.show {
+	display: block;
 }
 
 /* The line chart will take the left half of the screen */

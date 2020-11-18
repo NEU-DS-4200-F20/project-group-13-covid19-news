@@ -143,6 +143,8 @@ function linechart() {
       return d.id;
      })
 
+     selectableElements = d3.selectAll('path');
+
      // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
      svg.append("text") 
         .attr("x", 195)
@@ -246,7 +248,19 @@ function linechart() {
       if (!arguments.length) return;
   
       // Select an element if its datum was selected
-      console.log(selectedData)
+      let selectedLines = [];
+      for (let i = 0; i < selectedData.length; i++) { // first go through and construct an array with all the selected word strings
+        selectedLines.push(selectedData[i].data.Word);
+      }
+
+      let lines = document.getElementsByClassName('line');
+      for (let i = 0; i < lines.length; i++) { // go through all the lines and show/hide depending on if the word is selected or not
+        if (selectedLines.includes(lines[i].id)) {
+          lines[i].style.display = 'block'
+        } else {
+          lines[i].style.display = 'none'
+        }
+      }
     };
   
     return chart;
