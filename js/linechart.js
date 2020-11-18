@@ -21,7 +21,6 @@ function linechart() {
       yLabelOffsetPx = 0,
       xScale = d3.scalePoint(),
       yScale = d3.scaleLinear(),
-      ourBrush = null,
       selectableElements = d3.select(null),
       dispatcher;
   
@@ -89,7 +88,6 @@ function linechart() {
           .attr('transform', 'translate(0,' + (height) + ')')
           .call(d3.axisBottom(xScale).tickFormat(function(d,i){ return months[i] })) // format the ticks. source: https://stackoverflow.com/questions/29385146/changing-ticks-values-to-text-using-d3
 
-          
       // Put X axis tick labels at an angle
       xAxis.selectAll('text')	
           .style('text-anchor', 'end')
@@ -145,15 +143,17 @@ function linechart() {
       return d.id;
      })
 
+     selectableElements = d3.selectAll('path');
+
      // this appends a title for the graph. Source: http://www.d3noob.org/2013/01/adding-title-to-your-d3js-graph.html
      svg.append("text") 
-                .attr("x", 195)
-                .attr("y", -34)
-                .attr("text-anchor", "middle")
-                .style("font-size", "10px")
-                .style("text-decoration", "underline")
-                .attr('margin-bottom', 200)
-                .text("Usage of Keywords in COVID-related Articles (January - April 2020)");
+        .attr("x", 195)
+        .attr("y", -34)
+        .attr("text-anchor", "middle")
+        .style("font-size", "10px")
+        .style("text-decoration", "underline")
+        .attr('margin-bottom', 200)
+        .text("Usage of Keywords in COVID-related Articles (January - April 2020)");
 
     // append axis labels
     svg.append("text") 
@@ -248,9 +248,19 @@ function linechart() {
       if (!arguments.length) return;
   
       // Select an element if its datum was selected
-      selectableElements.classed('selected', d =>
-        selectedData.includes(d)
-      );
+      let selectedLines = [];
+      for (let i = 0; i < selectedData.length; i++) { // first go through and construct an array with all the selected word strings
+        selectedLines.push(selectedData[i].data.Word);
+      }
+
+      let lines = document.getElementsByClassName('line');
+      for (let i = 0; i < lines.length; i++) { // go through all the lines and show/hide depending on if the word is selected or not
+        if (selectedLines.includes(lines[i].id)) {
+          lines[i].style.display = 'block'
+        } else {
+          lines[i].style.display = 'none'
+        }
+      }
     };
   
     return chart;
