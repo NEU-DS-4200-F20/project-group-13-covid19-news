@@ -24,7 +24,21 @@
       // when the bubble chart is updated via brushing, tell the lineplot to update its selection
       bubbleChart.selectionDispatcher()
       .on(`${dispatchString}.bc-to-lc`, lineChart.updateSelection)
+
+      d3.csv('data/bias.csv').then((data) => {
+        let tblWordByPercent = graphTable()
+        .selectionDispatcher(d3.dispatch(dispatchString))
+        ('#table', data);
+
+        bubbleChart.selectionDispatcher()
+        .on(`${dispatchString}.bc-to-tbl`, tblWordByPercent.updateSelection)
+      })
+
+      
     });
+
+
+    
   });
 
   

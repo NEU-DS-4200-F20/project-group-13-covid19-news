@@ -9,6 +9,9 @@ h1, h2, h3 {
 	line-height: 1.2
 }
 
+table thead { display:block; }
+table tbody { height:300px; overflow-y:scroll; display:block; }
+
 /* Your text should be in a nice narrow column */
 .content-column {
 	max-width: 650px;
@@ -44,12 +47,12 @@ h1, h2, h3 {
 	display: block;
 }
 
-/* The line chart will take the left half of the screen */
+/* The line chart will take the right half of the screen */
 .linechart-holder {
 	flex: 0 0 50%;
-  }
+}
   
-  /* The scatterplot will take the right half of the screen */
+  /* The scatterplot will take the left half of the screen */
 .bubblechart-holder {
 flex: 1;
 }
@@ -57,6 +60,63 @@ flex: 1;
 .vis-svg {
   background-color: #f4f1f0;
 }
+
+#table {
+	margin-top: -50%;
+	margin-left: 55%;
+}
+
+/* Disable text selection on table. Source: https://stackoverflow.com/questions/5611358/how-to-disable-text-selection-on-a-table-in-a-tricky-situation*/
+tr {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Pretty table layout */
+table {
+	font-size: 14px;
+	border-collapse: separate;
+	/* vertical | horizontal */
+	border-spacing: 0 0;
+	text-align: right;
+	margin: 0 auto;
+  }
+
+  /* moved given CSS for coloring the table into my own classes */
+.highlighted {
+	background-color: pink;
+}
+
+.currently-highlighted {
+	background-color: #e08fa3;
+}
+
+.currently-hovered-gray {
+	background-color: #d6d6d6;
+}
+  
+th, td {
+	/* vertical | horizontal */
+	padding: 0 8px;
+  }
+  
+  /* Don't also do text drag selection */
+  table.text-unselectable {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	cursor: default;
+  }
+
+
 
 /* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */  
 #forkongithub a{
