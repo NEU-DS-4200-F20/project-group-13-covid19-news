@@ -2,6 +2,7 @@
 
 // Initialize a line chart. Modeled after Mike Bostock's
 // Reusable Chart framework https://bost.ocks.org/mike/chart/
+const slices = []; // structure data/group words by month
 function linechart() {
 
     // Based on Mike Bostock's margin convention
@@ -10,7 +11,7 @@ function linechart() {
         top: 90,
         left: 200,
         right: 30,
-        bottom: 35
+        bottom: 150
       },
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom,
@@ -27,8 +28,6 @@ function linechart() {
     // Create the chart by adding an svg to the div with the id 
     // specified by the selector using the given data
     function chart(selector, data) { 
-
-      const slices = []; // structure data/group words by month
       const color = d3.scaleOrdinal(d3.schemeCategory10);
       
       data.forEach((word) => { // source: https://datawanderings.com/2019/10/28/tutorial-making-a-line-chart-in-d3-js-v-5/
@@ -62,7 +61,7 @@ function linechart() {
       let svg = d3.select(selector)
         .append('svg')
           .attr('preserveAspectRatio', 'xMidYMid meet')
-          .attr('viewBox', [150, 40, 500, 700].join(' '))
+          .attr('viewBox', [100, 20, 500, 900].join(' '))
           .classed('svg-content', true);
   
       svg = svg.append('g')
