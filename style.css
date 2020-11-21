@@ -88,7 +88,7 @@ table {
 	border-spacing: 0 0;
 	text-align: right;
 	margin-top: -20%;
-	margin-left: 65%;
+	margin-left: 57%;
 	z-index: -1;
   }
 
@@ -179,3 +179,20 @@ th, td {
 		box-shadow:4px 4px 10px rgba(0,0,0,0.8);
 	}
 }
+
+/* Make table responsive. Source: https://zurb.com/playground/projects/responsive-tables/index.html */
+table { 
+	width: 40%; 
+	border-collapse: collapse; 
+  }
+ 
+  th { 
+	background: #333; 
+	color: white; 
+	font-weight: bold; 
+  }
+  td, th { 
+	padding: 6px; 
+	border: 1px solid #ccc; 
+	text-align: left; 
+  }

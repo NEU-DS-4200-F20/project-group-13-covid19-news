@@ -244,12 +244,14 @@ function linechart() {
     // Given selected data from another visualization 
     // select the relevant elements here (linking)
     chart.updateSelection = function (selectedData) {
+      console.log(selectedData)
       if (!arguments.length) return;
   
       // Select an element if its datum was selected
       let selectedLines = [];
       for (let i = 0; i < selectedData.length; i++) { // first go through and construct an array with all the selected word strings
-        selectedLines.push(selectedData[i].data.Word);
+        let word = selectedData[i].word || selectedData[i].data.Word
+        selectedLines.push(word);
       }
 
       let lines = document.getElementsByClassName('line');

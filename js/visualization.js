@@ -26,15 +26,18 @@
       .on(`${dispatchString}.bc-to-lc`, lineChart.updateSelection)
 
       d3.csv('data/bias.csv').then((data) => {
-        let tblWordByPercent = graphTable()
+        let tblWordByPercent = graphTable() //draw table
         .selectionDispatcher(d3.dispatch(dispatchString))
         ('#table', data);
 
-        bubbleChart.selectionDispatcher()
+        bubbleChart.selectionDispatcher() // when bubble chart is selected, update table
         .on(`${dispatchString}.bc-to-tbl`, tblWordByPercent.updateSelection)
 
-        tblWordByPercent.selectionDispatcher()
+        tblWordByPercent.selectionDispatcher() // when table is selected, update bubble chart
         .on(`${dispatchString}.tbl-to-bc`, bubbleChart.updateSelection)
+
+        tblWordByPercent.selectionDispatcher() // when table is selected, update line chart
+        .on(`${dispatchString}.tbl-to-lc`, lineChart.updateSelection)
       })
 
       
