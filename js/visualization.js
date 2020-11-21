@@ -32,6 +32,9 @@
 
         bubbleChart.selectionDispatcher()
         .on(`${dispatchString}.bc-to-tbl`, tblWordByPercent.updateSelection)
+
+        tblWordByPercent.selectionDispatcher()
+        .on(`${dispatchString}.tbl-to-bc`, bubbleChart.updateSelection)
       })
 
       
