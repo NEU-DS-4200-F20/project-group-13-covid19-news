@@ -44,7 +44,7 @@ function graphTable() {
         let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
         dispatcher.call(dispatchString, this, data);
       })
-      .on('mouseover', function(d) {
+      .on('mouseover', function(e) {
         if (isClicking) { // if click + mousemove, highlight the rows over move
           d3.select(this).classed('highlighted', true)
           // Get the name of our dispatcher's event
@@ -56,7 +56,7 @@ function graphTable() {
 
         // get an array of the current classes applied to the given element. This allows us to see if we 
         // should apply the grayish background hover or the dark pink background hover
-        const currentClasses = d.path[1].className.split(' ');
+        const currentClasses = e.path[1].className.split(' ');
 
         if (currentClasses.includes('highlighted')) { // user is hovering highlighted cell 
           d3.selectAll('tr').classed('currently-highlighted', false) // turn off any other currently highlighted row, if there are any
@@ -117,7 +117,8 @@ function graphTable() {
 
         // remove any styling from previous brushing
         for (let i = 0; i <rows.length; i++) {
-          rows[i].style.backgroundColor = 'white'
+          // rows[i].style.backgroundColor = 'white'
+          rows[i].classList = []; // remove any applied classes
         }
 
         // Select an element if its datum was selected
@@ -125,7 +126,7 @@ function graphTable() {
           let searchWord = selectedData[i].data.Word
           for (let j = 0; j < rows.length; j++) {
             if (rows[j].innerText.includes(searchWord)) { // if selected
-              rows[j].style.backgroundColor = 'pink'
+              rows[j].classList.add("highlighted")
             } 
           }
         }

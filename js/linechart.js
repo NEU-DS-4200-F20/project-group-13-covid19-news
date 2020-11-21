@@ -61,7 +61,7 @@ function linechart() {
       let svg = d3.select(selector)
         .append('svg')
           .attr('preserveAspectRatio', 'xMidYMid meet')
-          .attr('viewBox', [100, 20, 500, 900].join(' '))
+          .attr('viewBox', [100, 20, 500, 380].join(' '))
           .classed('svg-content', true);
   
       svg = svg.append('g')

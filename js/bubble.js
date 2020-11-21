@@ -16,7 +16,8 @@ function graphBubble() {
       },
       ourBrush = null,
       selectableElements = d3.select(null),
-      dispatcher;
+      dispatcher,
+      svg;
 
     // Create the chart by adding an svg to the div with the id 
     // specified by the selector using the given data
@@ -41,7 +42,7 @@ function graphBubble() {
             .size([diameter, diameter])
             .padding(1.5);
 
-            let svg = d3.select(selector)
+            svg = d3.select(selector)
             .append('svg')
               .attr('preserveAspectRatio', 'xMidYMid meet')
               .attr('viewBox', [50, 0, 205, 250].join(' '))
@@ -235,7 +236,15 @@ function graphBubble() {
   // Given selected data from another visualization 
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
+    let selectedWords = [] // keep track of words in a string array
+    for (let i =0; i < selectedData.length; i++) {
+      selectedWords.push(selectedData[i].word)
+    }
     if (!arguments.length) return;
+    let circles = svg.selectAll('circle')
+    circles.classed("selected", function(d){ // if bubble is selected, color it
+      return selectedWords.includes(d.data.Word)
+    })
   };
 
 
