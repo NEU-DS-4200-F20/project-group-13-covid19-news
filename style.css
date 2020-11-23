@@ -101,7 +101,7 @@ table {
 	border-spacing: 0 0;
 	text-align: right;
 	margin-top: -20%;
-	margin-left: 57%;
+	margin-left: 65%;
 	z-index: -1;
   }
 
@@ -197,6 +197,10 @@ th, td {
 table { 
 	width: 40%; 
 	border-collapse: collapse; 
+	display: block;
+	height: 500px;
+	width: 310px;
+	overflow-y: scroll;
   }
  
   th { 
