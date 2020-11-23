@@ -67,6 +67,11 @@ function linechart() {
       svg = svg.append('g')
           .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
   
+      // to create the tooltip
+      let div = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);  
+
       //Define scales
       xScale
         .domain(d3.group(data, xValue).keys())
@@ -122,25 +127,22 @@ function linechart() {
     .attr("d", function(d) { return line(d.values); })
     .style("stroke", function(d, i) { // color the lines based on word usage
       return color(i)
-  })
-
-    // append the word next to the line
-    lines.append("text")
-    .attr("class","serie_label")
-    .datum(function(d) {
-        return {
-            id: d.id,
-            value: d.values[d.values.length - 1],
-            total: d.total
-          }; })  
-    .attr("transform", function(d) {
-            return "translate(" + (xScale(d.value.month) + 10)  
-            + "," + (yScale(d.value.percent)) + ")";})
-    .attr("x", 5)
-    .attr("font-size", '6px')
-    .text(function(d) { 
-      return d.id;
-     })
+  }).on("mouseover", function(event,d) {  // tooltip with word displayed - https://bl.ocks.org/d3noob/180287b6623496dbb5ac4b048813af52
+       div.transition()
+         .duration(200)
+         .style("opacity", .9);
+       div.html(d.id)
+         .style("left", (event.pageX) + "px")
+         .style("top", (event.pageY - 28) + "px");
+       lines.selectAll("path").style("opacity", 0.1);
+       d3.select(this).style("opacity", 1)  // To reduce opacity of other lines - https://stackoverflow.com/questions/28376166/clear-opacity-in-d3-after-click
+       })
+     .on("mouseout", function(d) {
+       div.transition()
+         .duration(500)
+         .style("opacity", 0);
+       lines.selectAll("path").style("opacity", 1);
+       });
 
      selectableElements = d3.selectAll('path');
 
