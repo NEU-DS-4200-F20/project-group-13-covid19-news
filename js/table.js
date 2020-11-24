@@ -7,7 +7,7 @@ function graphTable() {
     // Create the table by adding an table to the div with the id 
     // specified by the selector using the given data
     function chart(selector, data) {
-      let columns = ['word','left_b','center_b','right_b','total']
+      let columns = ['Word','Usage by Left-leaning Domains (%)','Usage by Neutral Domains (%)','Usage by Right-leaning Domains (%)','# of Articles Used In']
       let table = d3.select(selector).append('table')
       let thead = table.append('thead')
       let tbody = table.append('tbody');
@@ -117,7 +117,6 @@ function graphTable() {
 
         // remove any styling from previous brushing
         for (let i = 0; i <rows.length; i++) {
-          // rows[i].style.backgroundColor = 'white'
           rows[i].classList = []; // remove any applied classes
         }
 

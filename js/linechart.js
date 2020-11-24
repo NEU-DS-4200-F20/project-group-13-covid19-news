@@ -128,7 +128,7 @@ function linechart() {
     .style("stroke", function(d, i) { // color the lines based on word usage
       return color(i)
   }).on("mouseover", function(event,d) {  // tooltip with word displayed - https://bl.ocks.org/d3noob/180287b6623496dbb5ac4b048813af52
-       div.transition()
+    div.transition()
          .duration(200)
          .style("opacity", .9);
        div.html(d.id)
@@ -246,13 +246,12 @@ function linechart() {
     // Given selected data from another visualization 
     // select the relevant elements here (linking)
     chart.updateSelection = function (selectedData) {
-      console.log(selectedData)
       if (!arguments.length) return;
   
       // Select an element if its datum was selected
       let selectedLines = [];
       for (let i = 0; i < selectedData.length; i++) { // first go through and construct an array with all the selected word strings
-        let word = selectedData[i].word || selectedData[i].data.Word
+        let word = selectedData[i].Word || selectedData[i].data.Word
         selectedLines.push(word);
       }
 

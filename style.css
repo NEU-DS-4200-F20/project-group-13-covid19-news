@@ -22,12 +22,6 @@ h1, h2, h3 {
   display: flex;
 }
 
-#coronavirus-cases {
-	stroke: purple;
-	stroke-width: 2px;
-	stroke-dasharray: 2;
-}
-
 .selected {
 	opacity: 1 !important;
 	stroke: black;
@@ -37,6 +31,7 @@ h1, h2, h3 {
 
 .line {
 	fill: none;
+	stroke-width: 2.5px;
 	display: none;
 }
 
