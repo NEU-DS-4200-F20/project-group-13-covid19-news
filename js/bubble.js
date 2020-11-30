@@ -236,9 +236,10 @@ function graphBubble() {
   // Given selected data from another visualization 
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
+    console.log(selectedData)
     let selectedWords = [] // keep track of words in a string array
     for (let i =0; i < selectedData.length; i++) {
-      selectedWords.push(selectedData[i].word)
+      selectedWords.push(selectedData[i].Word)
     }
     if (!arguments.length) return;
     let circles = svg.selectAll('circle')
