@@ -66,55 +66,59 @@ function graphBubble() {
                     .attr("y", 210)
                     .attr("width", 5)
                     .attr("height", 5)
-                    .style("fill", "#7fbf7f");
+                    .style("fill", "#003f00");
 
                 svg.append("rect")
                     .attr("x", 70)
                     .attr("y", 220)
                     .attr("width", 5)
                     .attr("height", 5)
-                    .style("fill", "#198b19");
+                    .style("fill", "#006500");
 
                 svg.append("rect")
                     .attr("x", 70)
                     .attr("y", 230)
                     .attr("width", 5)
                     .attr("height", 5)
-                    .style("fill", "#006500");
+                    .style("fill", "#198b19");
 
                     svg.append("rect")
                     .attr("x", 70)
                     .attr("y", 240)
                     .attr("width", 5)
                     .attr("height", 5)
-                    .style("fill", "#003f00");
+                    .style("fill", "#7fbf7f");
 
                 // add color legend text
                 svg.append("text") 
                     .attr("x", 77)
                     .attr("y", 212.75)
-                    .text("Bottom 25% most commonly used words in articles")
+                    .text("Top 25% most commonly used words in articles")
                     .style("font-size", "4px")
                     .style("fill", "rgb(0, 0, 0)")
-                    .attr("alignment-baseline", "middle");
+                    .attr("alignment-baseline", "middle")
+                    .attr("class", "unselectable");
                     svg.append("text") 
                     .attr("x", 77)
                     .attr("y", 222.75)
-                    .text("25-50% most commonly used words in articles")
+                    .text("50-75% most commonly used words in articles")
                     .style("font-size", "4px")
                     .style("fill", "rgb(0, 0, 0)")
+                    .attr("class", "unselectable")
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
                     .attr("x", 77)
                     .attr("y", 232.75)
-                    .text("50-75% most commonly used words in articles")
+                    .text("25-50% most commonly used words in articles")
                     .style("font-size", "4px")
                     .style("fill", "rgb(0, 0, 0)")
+                    .attr("class", "unselectable")
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
                     .attr("x", 77)
                     .attr("y", 242.75)
-                    .text("Top 25% most commonly used words in articles")
+                    .attr("class", "unselectable")
+                    .text("Bottom 25% most commonly used words in articles")
                     .style("font-size", "4px")
                     .style("fill", "rgb(0, 0, 0)")
                     .attr("alignment-baseline", "middle");
@@ -180,7 +184,6 @@ function graphBubble() {
         d3.select(self.frameElement)
             .style("height", diameter + "px");
 
-
     svg.call(brush);
 
     // Highlight points when brushed
@@ -236,7 +239,6 @@ function graphBubble() {
   // Given selected data from another visualization 
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
-    console.log(selectedData)
     let selectedWords = [] // keep track of words in a string array
     for (let i =0; i < selectedData.length; i++) {
       selectedWords.push(selectedData[i].Word)

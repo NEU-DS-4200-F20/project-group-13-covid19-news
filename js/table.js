@@ -27,9 +27,9 @@ function graphTable() {
 		var rows = tbody.selectAll('tr')
 		  .data(data)
 		  .enter()
-        .append('tr')
-        .on("mousedown", function(d){ // on mousedown event, highlight row that was clicked
-            isClicking = true;
+      .append('tr')
+      .on("mousedown", function(d){ // on mousedown event, highlight row that was clicked
+          isClicking = true;
 
         // remove any previous classes, if there were any (eg. styling from when cells were clicked/hovered before)
         d3.selectAll('tr').classed('highlighted', false)
@@ -56,7 +56,7 @@ function graphTable() {
 
         // get an array of the current classes applied to the given element. This allows us to see if we 
         // should apply the grayish background hover or the dark pink background hover
-        const currentClasses = e.path[1].className.split(' ');
+        const currentClasses = this.className.split(' ');
 
         if (currentClasses.includes('highlighted')) { // user is hovering highlighted cell 
           d3.selectAll('tr').classed('currently-highlighted', false) // turn off any other currently highlighted row, if there are any
@@ -66,7 +66,7 @@ function graphTable() {
         }
       })
       .on('mouseout', function(d) { // on mouseout, remove any classes applied during hover
-        const currentClasses = d.path[1].className.split(' '); // get current classes (I know this from previous experience with DOM events)
+        const currentClasses = this.className.split(' '); // get current classes (I know this from previous experience with DOM events)
 
         if (currentClasses.includes('highlighted')) { // when the row is no longer highlighted, turn off currently-highlighted class
           d3.select(this).classed('currently-highlighted', false)
@@ -79,9 +79,7 @@ function graphTable() {
 
       rows
       .on('mouseup', (d) => { // on mouseup, change isClicking to false
-        if (isClicking) {
-          isClicking = false;
-        }
+        isClicking = false;
       })
 
 
