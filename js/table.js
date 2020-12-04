@@ -122,7 +122,8 @@ function graphTable() {
         for (let i = 0; i < selectedData.length; i++) { // first go through and construct an array with all the selected word strings
           let searchWord = selectedData[i].data.Word
           for (let j = 0; j < rows.length; j++) {
-            if (rows[j].innerText.includes(searchWord)) { // if selected
+            /* I ADDED THIS*/
+            if (rows[j].cells[0].innerText == searchWord) { // if selected
               rows[j].classList.add("highlighted")
             } 
           }

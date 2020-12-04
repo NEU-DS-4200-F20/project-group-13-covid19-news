@@ -128,6 +128,8 @@ function graphBubble() {
             .sum(function(d) { 
                 return d.Count; });
 
+            svg.call(brush);
+
             const node = svg.selectAll(".node")
             .data(bubble(nodes).descendants())
             .enter()
@@ -140,6 +142,8 @@ function graphBubble() {
                 return `translate(${d.x}, ${d.y + 8})`
             })
             .attr("cx", 410).attr("cy", 190)
+
+
 
             // details on demand when user hovers over bubble
             node.append("title")
@@ -184,7 +188,21 @@ function graphBubble() {
         d3.select(self.frameElement)
             .style("height", diameter + "px");
 
-    svg.call(brush);
+
+/* I ADDED THIS*/
+        svg.selectAll('circle,text').on('click', function(event) {
+            if(event.shiftKey) {
+                if(this.tagName == 'circle') {
+                    d3.select(this).classed("selected", true)
+                } else {
+                    d3.select(this.previousSibling).classed("selected", true)
+                }
+        let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+        dispatcher.call(dispatchString, this, svg.selectAll('.selected').data());
+    }
+        });     
+
+    
 
     // Highlight points when brushed
     function brush(g) {

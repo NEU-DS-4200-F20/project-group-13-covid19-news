@@ -42,8 +42,8 @@ h1, h2, h3 {
 div.tooltip {
   position: absolute;
   text-align: center;
-  width: 75px;
-  height: 15px;
+  width: 200px;
+  height: 70px;
   padding: 2px;
   font: 12px sans-serif;
   background: lightsteelblue;
@@ -51,6 +51,7 @@ div.tooltip {
   border-radius: 8px;
   pointer-events: none;
 }
+/* I ADDED THIS*/
 
 /* The line chart will take the left half of the screen */
 .linechart-holder {
@@ -74,6 +75,19 @@ div.tooltip {
 .bubblechart-holder {
 flex: 1;
 }
+
+/* Prevent user from highlighting text on the linechart*/
+  #bubblechart {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	cursor: default;
+  }
+  /* I ADDED THIS*/
 
 .vis-svg {
   background-color: #f4f1f0;
