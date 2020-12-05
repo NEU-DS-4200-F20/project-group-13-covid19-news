@@ -55,6 +55,7 @@ div.tooltip {
 /* The line chart will take the left half of the screen */
 .linechart-holder {
 	flex: 0 0 50%;
+	height: 500px;
   }
 
   /* Prevent user from highlighting text on the linechart*/
@@ -79,6 +80,10 @@ flex: 1;
   background-color: #f4f1f0;
 }
 
+svg {
+	z-index: -1;
+}
+
 tr {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -96,8 +101,7 @@ table {
 	border-spacing: 0 0;
 	text-align: right;
 	margin-top: -20%;
-	margin-left: 65%;
-	z-index: -1;
+	margin-left: 60%;
   }
 
   /* moved given CSS for coloring the table into my own classes */
@@ -115,7 +119,7 @@ table {
   
 th, td {
 	/* vertical | horizontal */
-	padding: 0 8px;
+	padding: 0 10px;
   }
   
   /* Don't also do text drag selection */
