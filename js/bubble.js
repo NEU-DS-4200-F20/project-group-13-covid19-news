@@ -63,28 +63,28 @@ function graphBubble() {
                 // add color legend rectangles
                 svg.append("rect")
                     .attr("x", 70)
-                    .attr("y", 210)
+                    .attr("y", 215)
                     .attr("width", 5)
                     .attr("height", 5)
                     .style("fill", "#003f00");
 
                 svg.append("rect")
                     .attr("x", 70)
-                    .attr("y", 220)
+                    .attr("y", 225)
                     .attr("width", 5)
                     .attr("height", 5)
                     .style("fill", "#006500");
 
                 svg.append("rect")
                     .attr("x", 70)
-                    .attr("y", 230)
+                    .attr("y", 235)
                     .attr("width", 5)
                     .attr("height", 5)
                     .style("fill", "#198b19");
 
                     svg.append("rect")
                     .attr("x", 70)
-                    .attr("y", 240)
+                    .attr("y", 245)
                     .attr("width", 5)
                     .attr("height", 5)
                     .style("fill", "#7fbf7f");
@@ -92,7 +92,7 @@ function graphBubble() {
                 // add color legend text
                 svg.append("text") 
                     .attr("x", 77)
-                    .attr("y", 212.75)
+                    .attr("y", 217.75)
                     .text("Top 25% most commonly used words in articles")
                     .style("font-size", "4px")
                     .style("fill", "rgb(0, 0, 0)")
@@ -100,7 +100,7 @@ function graphBubble() {
                     .attr("class", "unselectable");
                     svg.append("text") 
                     .attr("x", 77)
-                    .attr("y", 222.75)
+                    .attr("y", 227.75)
                     .text("50-75% most commonly used words in articles")
                     .style("font-size", "4px")
                     .style("fill", "rgb(0, 0, 0)")
@@ -108,7 +108,7 @@ function graphBubble() {
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
                     .attr("x", 77)
-                    .attr("y", 232.75)
+                    .attr("y", 237.75)
                     .text("25-50% most commonly used words in articles")
                     .style("font-size", "4px")
                     .style("fill", "rgb(0, 0, 0)")
@@ -116,7 +116,7 @@ function graphBubble() {
                     .attr("alignment-baseline", "middle");
                     svg.append("text") 
                     .attr("x", 77)
-                    .attr("y", 242.75)
+                    .attr("y", 247.75)
                     .attr("class", "unselectable")
                     .text("Bottom 25% most commonly used words in articles")
                     .style("font-size", "4px")

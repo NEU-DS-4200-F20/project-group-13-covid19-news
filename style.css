@@ -59,7 +59,7 @@ div.tooltip {
   }
 
   /* Prevent user from highlighting text on the linechart*/
-  #linechart {
+  #linechart, #bubblechart {
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
