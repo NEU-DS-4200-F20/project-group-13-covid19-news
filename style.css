@@ -42,8 +42,8 @@ h1, h2, h3 {
 div.tooltip {
   position: absolute;
   text-align: center;
-  width: 75px;
-  height: 15px;
+  width: 200px;
+  height: 70px;
   padding: 2px;
   font: 12px sans-serif;
   background: lightsteelblue;

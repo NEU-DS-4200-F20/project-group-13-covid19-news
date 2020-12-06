@@ -131,7 +131,11 @@ function linechart() {
     div.transition()
          .duration(200)
          .style("opacity", .9);
-       div.html(d.id)
+         let print = "The word <b>'" + d.id + "'</b> appeared in<br />";
+         d.values.forEach((element) => {
+          print += Math.round((element.percent + Number.EPSILON) * 100) / 100 + "% of articles in " + months[element.month - 1] + "<br />";
+         })
+       div.html(print)
          .style("left", (event.pageX) + "px")
          .style("top", (event.pageY - 28) + "px");
        lines.selectAll("path").style("opacity", 0.1);
