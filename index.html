@@ -43,8 +43,13 @@
     
     <h1>Abstract</h1>
     
-    <p>As the world becomes more interconnected, accurate and correct news and information becomes highly important. However, as there are dozens of journalism sites and websites one can use, a reader may prefer sources that have particular biases or use certain words. In this project, we will analyze the language in various news sources during the COVID-19 pandemic and extract keywords to visualize the types of news media bias each particular source has.</p>
-    <p><strong>Keywords</strong>: Media bias, fake news, linguistic analysis.</p>
+    <p>As the world becomes more interconnected, accurate and correct news and information becomes highly important. However, as there are dozens of journalism sites and websites one can use, a reader may prefer sources that have particular biases or use certain words. In this project, we analyzed the language used by various news sources during the COVID-19 pandemic to extract the most common keywords and their use over time.</p>
+    <p><strong>Keywords</strong>: Media bias, keyword usage, COVID-19.</p>
+    <p><a href='https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/'>Link to the slideshow</a>
+
+    <h1>Interaction Instructions</h1>
+    <p>Brush over the bubbles to select words. The selected words will appear on the line chart and will be highlighted on the table. Hover over each line to display which word it corresponds to and further details. Click on a single row on the table or click and drag across rows to show the word(s) on the line chart and highlight them on the bubble chart.</p>
+
     
     <h1>Visualization</h1>    
   </div>
@@ -64,18 +69,18 @@
   <div class = 'content-column'>
 
     <h1>Demo Video</h1>
-    
-    <p>Embed an MP4 demo video using the HTML5 &lt;video&gt; tag. For example, this screen recording Prof. Cody Dunne made of Mike Bostock's flexible transitions in D3 slide:</p>
-    
+        
     <video controls width='100%'>
-      <source src='http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4' type='video/mp4'>
+      <source src='files/Video.mp4' type='video/mp4'>
       <p>Your browser doesn't support HTML5 video. Here is
-       a <a href='http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4'>link to the video</a> instead.</p>
+       a <a href='files/Video.mp4'>link to the video</a> instead.</p>
     </video>
 
     <h1>Visualization explanation</h1>
     
-    <p>Replace with a brief explanation (can be copied from the paper) and linked presentation slides.</p>
+    <p>For our visualization, we decided to use a bubble chart to depict the most commonly used words in non-medical articles related to COVID-19. The size of the individual bubbles is based on how often the words appear (area encoding) and the bubbles are also colored according to how often the words appear. The 25% most commonly used words in the articles are represented through the darkest hue of green with the next 25% being represented through a lighter hue and so on. Moreover, the bubbles are positioned so that the most common words are in the center and the less common words are further out. We chose these encodings and channels because they would aid in finding extremums. For example, users can tell which words have been used the most because the different colors and relative positioning makes it easy to compare between words.</p>
+    <p>In addition, more specific data about the words and their usage by domain are displayed in a table. The table includes the word, percent usage of the word by left-leaning, right-leaning, center domains, and the number of articles the word was used in. The table also has a scrollbar that appears after the user starts scrolling on the table. We decided to use a table because it helps users explore more detailed information in a compact manner. After all, the circles themselves do not show any domain usage percentages. In fact, we were originally planning to superimpose pie charts with the percentages after the user clicked on the bubble chart. However, we decided that having a table would not only be more effective for having users compare domain usage but also keep the bubble chart simple.</p>
+    <p>Finally, we have a line chart depicting percent word usage over time. After all, line charts are highly effective for helping users see trends over time. The line chart doesn’t display any lines until the user selects what exact words one wants to see. We have decided not to show all the lines at once because it would clutter and probably would not be useful (there are over 150 words and thus would mean over 150 lines). Instead, to see the lines for certain words, the user can click/brush on the bubbles/table rows. We decided to give each line a different color to make it easier to differentiate between them, and the user can hover over each line to get more details. In this way, all of the visualizations are linked, and users can explore the different types of information easily. Thus, for ease of use, we have placed the visualizations side by side so users don’t have to scroll up and down.</p>
     
     <h1>Acknowledgments</h1>
 
@@ -108,6 +113,10 @@
         Creating a multi-linechart</a>
         by Data Wanderings
       </li>
+      <li><a href='https://bl.ocks.org/d3noob/180287b6623496dbb5ac4b048813af52'>
+      	Simple tooltips</a>
+      	by D3 Noob
+  	  </li>
       <li><a href='https://stackoverflow.com/questions/35206125/javascript-es6-es5-find-in-array-and-change'>
         Find and update object in array</a>
         on StackOverflow
