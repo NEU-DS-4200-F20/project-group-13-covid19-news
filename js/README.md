@@ -1,5 +1,3 @@
-# Put the JavaScript code you write in this folder
+# D3 Javascript Visualizations
 
-We recommend you separate the implementation details for individual visualizations using the [Reusable Charts](https://bost.ocks.org/mike/chart/) framework Mike Bostock advocates.
-Broadly this means implementing visualizations as closures with getter-setter methods.
-This can be further extended to [making updatable charts](https://www.toptal.com/d3-js/towards-reusable-d3-js-charts).
+Our linechart, bubblechart, and table visualization code can be found here. We use the [Reusable Charts](https://bost.ocks.org/mike/chart/) framework Mike Bostock advocates. More information about the design choices of our visualizations can be found in our written report.

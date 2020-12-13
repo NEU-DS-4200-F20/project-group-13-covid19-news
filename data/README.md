@@ -1,6 +1,3 @@
 # Put any data files in this folder
 
-Ideally your data is a CSV file.
-
-*Do not commit personally identifying or confidential data!*
-If you do so, it is a pain to remove it later and it may have already been crawled by other sources. But [here is how you do so](https://help.github.com/en/github/authenticating-to-github/removing-sensitive-data-from-a-repository).
+To create the data, run ```cd createData ``` followed by ```npm run install``` to download all the node dependencies. Then change ```fs.createReadStream('')``` to contain the csv file to be read. If the csv contains the new content, domain name, and the date, the script will generate a new csv that is compatable with the d3 code. Please note that when generating the files, the 100 most common words in English are omitted.
