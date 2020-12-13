@@ -5,6 +5,15 @@ With this project, we analyzed news and media coverage about the COVID-19 pandem
 Link to your GitHub pages website: [https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/](https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/)  
 Link to presentation slides: [https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/edit#slide=id.g35f391192_045](https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/edit#slide=id.g35f391192_045)  
 
+# Setup
+
+1. Clone this repository to your local machine. E.g., in your terminal / command prompt CD to where you want this the folder for this activity to be. Then run git clone <YOUR_REPO_URL>
+2. CD or open a terminal / command prompt window into the cloned folder.
+3. Start a simple python webserver. E.g., python -m http.server, python3 -m http.server, or py -m http.server. If you are using python 2 you will need to use python -m SimpleHTTPServer instead.
+4. Wait for the output: Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/).
+5. Now open your web browser (Firefox or Chrome) and navigate to the URL: http://localhost:8000
+6. For better navigation read README.md inside the folders.
+
 # Instructions
 
 1. Open the [Github pages link](https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/) in Google Chrome or Mozilla Firefox browser. (Safari or other browsers do not support a lot of features of our visualisation.)
@@ -15,6 +24,7 @@ Link to presentation slides: [https://docs.google.com/presentation/d/1F32do7VI5w
 6. To select multiple rows - hover over table, click, hold, drag up or down. 
 7. Hovering over a line on a line chart will display you a corresponding word and trend details. 
 8. Additionally, if you scroll below the visualizations you can play demo video on how to interact with visualizations. 
+
 
 
 ## Organization
