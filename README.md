@@ -1,31 +1,29 @@
-# About Project
+# About our project
 
 With this project, we analyzed news and media coverage about the COVID-19 pandemic using text-based analysis. More specifically, we explored the most commonly used keywords and compared how different news outlets with different political biases wrote about the pandemic. The pandemic is personal to all of us and the vast difference in media coverage can be detrimental to the health and safety of people. We want to study how different sources convey themes related to the pandemic and how they have an influence on how people perceive it.
 
-Link to your GitHub pages website: [https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/](https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/)  
-Link to presentation slides: [https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/edit#slide=id.g35f391192_045](https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/edit#slide=id.g35f391192_045)  
+Link to the GitHub pages website: [https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/](https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/)  
+Link to the presentation slides: [https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/edit#slide=id.g35f391192_045](https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/edit#slide=id.g35f391192_045)  
 
-# Setup
+## Setup
 
-1. Clone this repository to your local machine. E.g., in your terminal / command prompt CD to where you want this the folder for this activity to be. Then run git clone <YOUR_REPO_URL>
-2. CD or open a terminal / command prompt window into the cloned folder.
-3. Start a simple python webserver. E.g., python -m http.server, python3 -m http.server, or py -m http.server. If you are using python 2 you will need to use python -m SimpleHTTPServer instead.
-4. Wait for the output: Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/).
+**Under no circumstances should you be editing files via the GitHub website user interface.** Do all your edits locally after cloning the repository. Commit major versions to your git repository.
+
+1. Clone this repository to your local machine.
+    E.g., in your terminal / command prompt `CD` to where you want this the folder for this activity to be. Then run `git clone <YOUR_REPO_URL>`
+
+2. `CD` or open a terminal / command prompt window into the cloned folder.
+
+3. Start a simple python webserver. E.g., `python -m http.server`, `python3 -m http.server`, or `py -m http.server`. If you are using python 2 you will need to use `python -m SimpleHTTPServer` instead, but please switch to python 3 as [Python 2 was sunset on 2020-01-01](https://www.python.org/doc/sunset-python-2/).
+
+4. Wait for the output: `Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/)`.
+
 5. Now open your web browser (Firefox or Chrome) and navigate to the URL: http://localhost:8000
-6. For better navigation read README.md inside the folders.
 
-# Instructions
+## Visualization Instructions
 
-1. Open the [Github pages link](https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/) in Google Chrome or Mozilla Firefox browser. (Safari or other browsers do not support a lot of features of our visualisation.)
-2. Scroll the website down to see visualizations. To activate line chart try selecting different words by clicking on bubbles they are written in.
-3. To select multiple bubbles - click, hold and drag on bubblechart. The corresponding lines will appear on the line chart. 
-4. You can also see selected words in the table on the right. Try also selecting words by clicking on different rows of the table. 
-5. To activate scrollbar - try hovering over the table and starting scrolling. 
-6. To select multiple rows - hover over table, click, hold, drag up or down. 
-7. Hovering over a line on a line chart will display you a corresponding word and trend details. 
-8. Additionally, if you scroll below the visualizations you can play demo video on how to interact with visualizations. 
-
-
+1. Open the [Github pages link](https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/) in Google Chrome or Mozilla Firefox. (Safari or other browsers do not support a lot of features of our visualisation.)
+2. Brush over the bubbles to select words. The selected words will appear on the line chart and will be highlighted on the table. Hover over each line to display which word it corresponds to and further details. Click on a single row on the table or click and drag across rows to show the word(s) on the line chart and highlight them on the bubble chart.
 
 ## Organization
 
@@ -62,4 +60,4 @@ Each folder has an explanatory `README.md` file.
   * `table.js` is a reusable model for table.
   * `linachart.js` is a reusable model for line chart.
 
-* `lib` contains JavaScript library we used. 
+* `lib` contains the JavaScript library we used. 
