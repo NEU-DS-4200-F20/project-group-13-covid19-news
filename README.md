@@ -2,8 +2,7 @@
 
 With this project, we analyzed news and media coverage about the COVID-19 pandemic using text-based analysis. More specifically, we explored the most commonly used keywords and compared how different news outlets with different political biases wrote about the pandemic. The pandemic is personal to all of us and the vast difference in media coverage can be detrimental to the health and safety of people. We want to study how different sources convey themes related to the pandemic and how they have an influence on how people perceive it.
 
-Link to the GitHub pages website: [https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/](https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/)  
-Link to the presentation slides: [https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/edit#slide=id.g35f391192_045](https://docs.google.com/presentation/d/1F32do7VI5wrsbVcwPp5jLmRXbPQkXb4-UhBejPlDm8c/edit#slide=id.g35f391192_045)  
+Link to the GitHub pages website: [https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/](https://neu-ds-4200-f20.github.io/project-group-13-covid19-news/)
 
 ## Setup
 
